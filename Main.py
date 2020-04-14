@@ -4,12 +4,6 @@ from Attack import Attack
 from Vote import Vote
 from WAS import WAS
 
-
-
-
-
-
-
 def main():
     
     c = Argument('c', ['comp', 'ml'], {'b'})
