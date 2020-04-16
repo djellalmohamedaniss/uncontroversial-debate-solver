@@ -11,7 +11,7 @@ class Argument:
         hash((self.name, self.topics, self.challenges))
 
     def __repr__(self):
-        return self.name
+        return "arg<{0}>".format(self.name)
 
     def top(self):
         return self.topics

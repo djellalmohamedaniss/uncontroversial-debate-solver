@@ -1,0 +1,27 @@
+{
+	"experts": {
+		"PC1": {
+    		"a": {
+    			"attacks": [],
+    			"top": ["kr", "cog"]
+    		}
+		},
+		"PC2" : {
+        	"b": {
+    			"attacks": ["a"],
+    			"top": ["comp"]
+    		},
+    		"d" : {
+        		"attacks" : ["a"],
+        		"top" : ["kr"]
+    		 }		  
+		},
+		"PC3" : {
+		    "c" : { 
+            	"attacks" : ["b"], 
+            	"top" : ["comp", "ml"]
+            }
+    	}
+
+	}
+}
