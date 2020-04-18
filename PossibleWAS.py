@@ -27,13 +27,32 @@ class PossibleWASList:
                 c_maximal_was = possible_was['was']
         return c_maximal_was
     
-    
+
     def get_was_maximum_unstable_attack(self):
         c_maximal_was = None
         for possible_was in self.possible_was_list:
             if c_maximal_was == None:
                 c_maximal_was = possible_was['was']
             elif len(possible_was['was'].unstable_attacks()) >= len(c_maximal_was.unstable_attacks()):
+                c_maximal_was = possible_was['was']
+        return c_maximal_was
+    
+    
+    def get_was_maximum_persistent_argument(self):
+        c_maximal_was = None
+        for possible_was in self.possible_was_list:
+            if c_maximal_was == None:
+                c_maximal_was = possible_was['was']
+            elif len(possible_was['was'].persistant_arguments()) >= len(c_maximal_was.persistant_arguments()):
+                c_maximal_was = possible_was['was']
+        return c_maximal_was
+    
+    def get_was_maximum_nonpersistent_argument(self):
+        c_maximal_was = None
+        for possible_was in self.possible_was_list:
+            if c_maximal_was == None:
+                c_maximal_was = possible_was['was']
+            elif len(possible_was['was'].non_persistant_arguments()) >= len(c_maximal_was.non_persistant_arguments()):
                 c_maximal_was = possible_was['was']
         return c_maximal_was
         

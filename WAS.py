@@ -113,7 +113,7 @@ class WAS(AS):
                 was_down = self.__possible_was__(expert,attack_name,-1)
                 possible_was_s.extend([{"attack" : attack_name , "was": was_up , "polarity" : +1},{"attack" : attack_name , "was": was_down , "polarity" : -1}])
             expert.set_possible_was(PossibleWAS(possible_was_s))
-            expert_name_using_expertise= "{0} : {1}".format(expert.name,",".join(expert.expertise))
+            expert_name_using_expertise= "{0}:{1}".format(expert.name,",".join(expert.expertise))
             possible_was_for_experts.update({ expert_name_using_expertise : PossibleWAS(possible_was_s)})
         return WASList(possible_was_for_experts),ExpertList(experts)
 

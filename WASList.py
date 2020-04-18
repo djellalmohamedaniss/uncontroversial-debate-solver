@@ -33,7 +33,7 @@ class WASList:
         first_element = self.was_dict[first_element_key]
         l=["expert"]
         for e in first_element:
-            l.append("({0}), s = {1}".format(e['attack'],e['polarity']))
+            l.append("({0}),s={1}".format(e['attack'],e['polarity']))
         x.field_names = l
         for expert,expert_effect in self.was_dict.items():
             l=[expert]

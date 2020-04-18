@@ -22,10 +22,16 @@ class ExpertWithWAS(Expert):
     def get_was_maximum_unstable_attack(self):
         return self.possible_was.get_was_maximum_unstable_attack()
     
+    def get_was_maximum_persistent_argument(self):
+        return self.possible_was.get_was_maximum_persistent_argument()
+    
+    def get_was_maximum_nonpersistent_argument(self):
+        return self.possible_was.get_was_maximum_nonpersistent_argument()
+    
     def necessarily_dominate(self,expert):
         was1 = self.get_was_maximum_unstable_attack()
         was2 = expert.get_was_maximum_stable_attack()
-        return all(elem in was1.stable_attacks() for elem in was2.stable_attacks())
+        return set(was2.stable_attacks()) <= set(was1.stable_attacks())
 
     def reinforce_dominate(self,expert):
         return self.optimisticaly_reinforce_dominate(expert) and self.pessimisticaly_reinforce_dominate(expert)
@@ -34,12 +40,30 @@ class ExpertWithWAS(Expert):
     def pessimisticaly_reinforce_dominate(self,expert):
         was1 = self.get_was_maximum_unstable_attack()
         was2 = expert.get_was_maximum_unstable_attack()
-        return all(elem in was2.unstable_attacks()  for elem in was1.unstable_attacks())
+        return set(was1.unstable_attacks()) <= set(was2.unstable_attacks())
+    
     
     def optimisticaly_reinforce_dominate(self,expert):
         was1 = self.get_was_maximum_stable_attack()
         was2 = expert.get_was_maximum_stable_attack()
-        return all(elem in was1.stable_attacks() for elem in was2.stable_attacks())
+        return set(was2.stable_attacks()) <= set(was1.stable_attacks())
+    
+    
+    def persist_dominate(self,expert):
+        return self.optimistically_persist_dominate(expert) and self.pessimisticaly_persist_dominate(expert)
+    
+    
+    def optimistically_persist_dominate(self,expert):
+        was1 = self.get_was_maximum_persistent_argument()
+        was2 = expert.get_was_maximum_persistent_argument()
+        return set(was2.persistant_arguments()) <= set(was1.persistant_arguments())     
+    
+    def pessimisticaly_persist_dominate(self,expert):
+        was1 = self.get_was_maximum_nonpersistent_argument()
+        was2 = expert.get_was_maximum_nonpersistent_argument()
+        return set(was1.non_persistant_arguments()) <= set(was2.non_persistant_arguments())         
+    
+    
     
     @staticmethod
     def __generator__(topics,expertise_cardinal):

@@ -1,17 +1,15 @@
-from Globals import liste_arc, liste_topic
-from copy import deepcopy
-
-
 class Attack:
+    
 
-    def __init__(self, first_argument, second_argument):
-        if ((first_argument.name, second_argument.name) in liste_arc):
+    
+    def __init__(self, first_argument, second_argument,topics):
             self.first_argument = first_argument
             self.second_argument = second_argument
+            self.topics = topics
             self.ev = [0,0]
-        else:
-            raise Exception("the attack ({0},{1}) does not exist".format(
-                first_argument.name, second_argument.name))
+            
+    def __hash__(self):
+        return hash(self.first_argument.name+self.second_argument.name)
 
             
     def __repr__(self):
@@ -39,14 +37,14 @@ class Attack:
 
     def prominent(self):
         prom = []
-        for t in liste_topic:
+        for t in self.topics:
             if (t in self.first_argument.top() and t in self.second_argument.top()):
                 prom.append(t)
         return prom
 
     def relevant(self):
         liste_rel = []
-        for t in liste_topic:
+        for t in self.topics:
             if(t in self.first_argument.top() and t not in self.second_argument.top()):
                 liste_rel.append(t)
             elif(t not in self.first_argument.top() and t in self.second_argument.top()):
@@ -55,7 +53,7 @@ class Attack:
 
     def irrelevant(self):
         non_pert = []
-        for t in liste_topic:
+        for t in self.topics:
             if (t not in self.first_argument.top() and t not in self.second_argument.top()):
                 non_pert.append(t)
         return non_pert

@@ -21,12 +21,12 @@ def fillArgumentsAndExperts(JSON):
        experts_list.update({expert : expert_object})
     return arguments_list,experts_list,set(topics_list)
 
-def fillAttacks(JSON,arguments):
+def fillAttacks(JSON,arguments,topics):
      attacks_list = {}
      for expert, properties in JSON.items():
        for argument, ar_properties in properties.items():
            for attacking in ar_properties['attacks']:
-               attack = Attack(arguments[argument],arguments[attacking])
+               attack = Attack(arguments[argument],arguments[attacking],topics)
                attack_key = "{0},{1}".format(argument,attacking)
                attacks_list.update({attack_key : attack})
      return attacks_list
@@ -37,6 +37,5 @@ def read_schema():
     with open('schema.json') as json_data:
         schema = json.load(json_data)
         arguments,experts,topics = fillArgumentsAndExperts(schema['experts'])
-        attacks = fillAttacks(schema["experts"],arguments)
+        attacks = fillAttacks(schema["experts"],arguments,topics)
     return arguments,experts,attacks,topics
-
