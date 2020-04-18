@@ -1,4 +1,5 @@
 from Globals import liste_arc, liste_topic
+from copy import deepcopy
 
 
 class Attack:
@@ -11,6 +12,7 @@ class Attack:
         else:
             raise Exception("the attack ({0},{1}) does not exist".format(
                 first_argument.name, second_argument.name))
+
             
     def __repr__(self):
         return "({0},{1},<{2},{3}>)".format(str(self.first_argument),str(self.second_argument),self.ev[0],self.ev[1])
@@ -29,6 +31,10 @@ class Attack:
     
     def apply_votes(self,votes):
         self.votes = votes
+        self.ev = self.evaluation_vector()
+    
+    def refresh_votes(self,new_votes):
+        self.votes.append(new_votes)
         self.ev = self.evaluation_vector()
 
     def prominent(self):
@@ -63,7 +69,7 @@ class Attack:
                 eva_vector[0] = eva_vector[0] + \
                     vote.polarity * vote.expert.impact(self)
                 eva_vector[1] = eva_vector[1] + len(self.top())
-        return tuple(eva_vector)
+        return eva_vector
     
     def is_beyond_any_doubt(self):
         return not self.is_strong() and not self.is_weak()

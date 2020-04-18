@@ -2,12 +2,22 @@ from AS import AS
 import networkx as nx
 from copy import deepcopy
 from CounterPartAs import CounterPartAs
+from Vote import Vote
+from WASList import WASList
+from ExpertList import ExpertList
+from PossibleWAS import PossibleWASList as PossibleWAS
+
 
 class WAS(AS):
     # Derived class from networkx directed graphs, nodes cannot be sets
     def __init__(self,liste_noeud,liste_arc):
-        self.weights = [attack.evaluation_vector() for attack in liste_arc]
+        self.weights = [attack.evaluation_vector() for attack in list(liste_arc.values())]
         super().__init__(liste_noeud,liste_arc)
+
+    
+    def update_weights(self):
+        self.weights = [attack.evaluation_vector() for attack in self.liste_arc]
+        
         
     def __copy__(self):
         return deepcopy(self)
@@ -86,6 +96,27 @@ class WAS(AS):
         return self.difference_of_argument_list(self.liste_noeud,self.non_persistant_arguments())
     
     
+    def __possible_was__(self,expert,attack_name,polarity):
+        was = self.__copy__()
+        attack_to_update=was.liste_arc_dict[attack_name]
+        vote = Vote(attack_to_update,expert,polarity)
+        attack_to_update.refresh_votes(vote)
+        was.update_weights()
+        return was
+    
+    def possible_was_of_experts(self,experts):
+        possible_was_for_experts={}
+        for expert in experts:
+            possible_was_s = []
+            for attack_name in self.liste_arc_dict:
+                was_up = self.__possible_was__(expert,attack_name,+1)
+                was_down = self.__possible_was__(expert,attack_name,-1)
+                possible_was_s.extend([{"attack" : attack_name , "was": was_up , "polarity" : +1},{"attack" : attack_name , "was": was_down , "polarity" : -1}])
+            expert.set_possible_was(PossibleWAS(possible_was_s))
+            expert_name_using_expertise= "{0} : {1}".format(expert.name,",".join(expert.expertise))
+            possible_was_for_experts.update({ expert_name_using_expertise : PossibleWAS(possible_was_s)})
+        return WASList(possible_was_for_experts),ExpertList(experts)
+
     ###### utility methods
     @staticmethod
     def attacks_to_weighted_tuple(attacks,weights):
@@ -128,9 +159,10 @@ class WAS(AS):
             
     
     ###### nx graph show method
-    def show_weighted_graph(self):
+    def show_graph_nx(self):
          WG=self.get_DG()
          pos = nx.random_layout(WG)
          nx.draw(WG,pos,edge_color='black',width=1,linewidths=2,\
-node_size=500,alpha=1,labels={node:node for node in WG.nodes()})
+node_size=1000,alpha=1,labels={node:node for node in WG.nodes()})
          nx.draw_networkx_edge_labels(WG,pos,edge_labels=self.edge_labels_from_weights(), label_pos=0.5)
+         

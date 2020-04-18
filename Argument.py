@@ -6,12 +6,9 @@ class Argument:
         
     def __eq__(self,obj):
         return self.name == obj.name 
-    
-    def __hash__(self):
-        hash((self.name, self.topics, self.challenges))
 
     def __repr__(self):
-        return "arg<{0}>".format(self.name)
+        return "<{0}>".format(self.name)
 
     def top(self):
         return self.topics

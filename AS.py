@@ -7,8 +7,10 @@ class AS:
     # constructeur qui prend en parametre la liste de noeuds et la liste darcs et qui cree un Digraph de nx
     def __init__(self, liste_noeud, liste_arc):
         self.DG = nx.DiGraph()
-        self.liste_noeud = liste_noeud
-        self.liste_arc = liste_arc
+        self.liste_noeud = list(liste_noeud.values())
+        self.liste_arc = list(liste_arc.values())
+        self.liste_noeud_dict = liste_noeud
+        self.liste_arc_dict = liste_arc
         self.__generate_nx__()
         
     def __generate_nx__(self):
@@ -36,11 +38,10 @@ class AS:
     def arguments_to_string_list(liste_noeud):
         return list(map(str,liste_noeud))
     
-    @staticmethod
-    def show_graph_nx(graph):
-        pos = nx.random_layout(graph)
-        nx.draw(graph,pos,edge_color='black',width=1,linewidths=2,\
-node_size=500,alpha=1,labels={node:node for node in graph.nodes()})
+    def show_graph_nx(self):
+        pos = nx.random_layout(self.DG)
+        nx.draw(self.DG,pos,edge_color='black',width=1,linewidths=2,\
+node_size=1500,alpha=1,labels={node:node for node in self.DG.nodes()})
     
     @staticmethod
     def attacks_to_tuple(liste_arc):
