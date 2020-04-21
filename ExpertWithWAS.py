@@ -29,6 +29,8 @@ class ExpertWithWAS(Expert):
         return self.possible_was.get_was_maximum_nonpersistent_argument()
     
     def necessarily_dominate(self,expert):
+        if self == expert:
+            return 0
         was1 = self.get_was_maximum_unstable_attack()
         was2 = expert.get_was_maximum_stable_attack()
         return set(was2.stable_attacks()) <= set(was1.stable_attacks())

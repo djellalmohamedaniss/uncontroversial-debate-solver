@@ -1,11 +1,11 @@
 {
 	"experts": {
 		"PC1": {
-    		"a": {
+        	"a": {
     			"attacks": [],
     			"top": ["kr", "cog"]
-    		}
-		},
+        	}
+    		},
 		"PC2" : {
         	"b": {
     			"attacks": ["a"],

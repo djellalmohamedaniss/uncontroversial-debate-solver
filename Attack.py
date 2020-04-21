@@ -7,6 +7,7 @@ class Attack:
             self.second_argument = second_argument
             self.topics = topics
             self.ev = [0,0]
+            self.votes = []
             
     def __hash__(self):
         return hash(self.first_argument.name+self.second_argument.name)
@@ -26,10 +27,6 @@ class Attack:
         u=list(self.ev)
         u[0]= new
         self.ev = tuple(u)
-    
-    def apply_votes(self,votes):
-        self.votes = votes
-        self.ev = self.evaluation_vector()
     
     def refresh_votes(self,new_votes):
         self.votes.append(new_votes)

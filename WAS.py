@@ -99,8 +99,7 @@ class WAS(AS):
     def __possible_was__(self,expert,attack_name,polarity):
         was = self.__copy__()
         attack_to_update=was.liste_arc_dict[attack_name]
-        vote = Vote(attack_to_update,expert,polarity)
-        attack_to_update.refresh_votes(vote)
+        Vote(attack_to_update,expert,polarity)
         was.update_weights()
         return was
     
