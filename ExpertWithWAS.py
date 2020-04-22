@@ -8,7 +8,7 @@ class ExpertWithWAS(Expert):
         
             
     def __repr__(self):
-        return "potential expert <{0}> with expertise in {1}".format(self.name, self.expertise, self.arguments)
+        return "expert <{0}> with expertise in {1}".format(self.name, self.expertise, self.arguments)
         
     def set_possible_was(self,possible_was):
         self.possible_was = possible_was

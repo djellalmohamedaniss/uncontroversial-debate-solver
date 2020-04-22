@@ -1,30 +1,29 @@
-from Vote import Vote
 from WAS import WAS
 from ExpertWithWAS import ExpertWithWAS as Expert
-import Parser
-from networkx import networkx as nx
+import WASFileParser as WFP
+import sys
 
 
 def main():
     
-    arguments,experts,attacks,topics=Parser.read_schema()
-
-    # votes
-    Vote(attacks['b,a'], experts['PC2'], 1)
-    Vote(attacks['b,a'], experts['PC3'], -1)
-    Vote(attacks['b,a'], experts['PC1'], -1)
-    Vote(attacks['c,b'], experts['PC2'], 1)
-    Vote(attacks['c,b'], experts['PC3'], 1)
-    Vote(attacks['c,b'], experts['PC1'], -1)
-    Vote(attacks['d,a'], experts['PC2'], 1)
+    try:
+        filename = sys.argv[1]
+    except IndexError:
+        print("ERROR! No file passed as first argument")
+        return 0
+    
+    arguments,attacks,topics = WFP.read(filename)
     
     was=WAS(arguments,attacks)
+    
     pws,experts=was.possible_was_of_experts(Expert.__generator__(topics,expertise_cardinal=2))
+
+    print("\nconsequences of every potential expert vote\n")
 
     print(pws.table_possible_was())
     
-    print(experts.best())
+    print("\nbest experts to pick are:\n\n{0}".format(experts.best()))
     
-
+    
 if __name__ == "__main__":
     main()

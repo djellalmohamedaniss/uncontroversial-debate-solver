@@ -1,27 +1,73 @@
 {
 	"experts": {
 		"PC1": {
-        	"a": {
-    			"attacks": [],
-    			"top": ["kr", "cog"]
-        	}
-    		},
-		"PC2" : {
-        	"b": {
-    			"attacks": ["a"],
-    			"top": ["comp"]
-    		},
-    		"d" : {
-        		"attacks" : ["a"],
-        		"top" : ["kr"]
-    		 }		  
+			"arguments": {
+				"a": {
+					"attacks": [],
+					"top": ["kr", "cog"]
+				}
+			},
+			"votes": {
+				"0": {
+					"argument": "b",
+					"target": "a",
+					"polarity": -1
+				},
+				"1": {
+					"argument": "c",
+					"target": "b",
+					"polarity": -1
+				}
+			}
 		},
-		"PC3" : {
-		    "c" : { 
-            	"attacks" : ["b"], 
-            	"top" : ["comp", "ml"]
-            }
-    	}
-
+		"PC2": {
+			"arguments": {
+				"b": {
+					"attacks": ["a"],
+					"top": ["comp"]
+				},
+				"d": {
+					"attacks": ["a"],
+					"top": ["kr"]
+				}
+			},
+			"votes": {
+				"0": {
+					"argument": "b",
+					"target": "a",
+					"polarity": 1
+				},
+				"1": {
+					"argument": "c",
+					"target": "b",
+					"polarity": 1
+				},
+				"2": {
+					"argument": "d",
+					"target": "a",
+					"polarity": 1
+				}
+			}
+		},
+		"PC3": {
+			"arguments": {
+				"c": {
+					"attacks": ["b"],
+					"top": ["comp", "ml"]
+				}
+			},
+			"votes": {
+				"0": {
+					"argument": "b",
+					"target": "a",
+					"polarity": -1
+				},
+				"1": {
+					"argument": "c",
+					"target": "b",
+					"polarity": 1
+				}
+			}
+		}
 	}
 }

@@ -28,7 +28,15 @@ class ExpertList:
             for expert in self.expert_list:
                 if exp.reinforce_dominate(expert):
                     d.add_edge(exp.name,expert.name)
-        return [elem[0] for elem in d.out_degree if max(d.out_degree, key=lambda x: x[1])[1] == elem[1]]  
+        return [self.find_by_name(elem[0]) for elem in d.out_degree if max(d.out_degree, key=lambda x: x[1])[1] == elem[1]]
+    
+    
+    def find_by_name(self,name):
+        for expert in self.expert_list:
+            if expert.name == name:
+                return expert
+        raise Exception("the expert {0} does not exist".format(name))
+        
         
         
     def find_by_expertise(self,expert_name):
