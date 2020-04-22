@@ -1,6 +1,6 @@
 # uncontroversial-debate-solver
 
-this is a school project on argumentation systems, where our goal is to pick the right expert to make a debate uncontroversial.
+this is a school project on argumentation systems, where our goal is to pick the right expert to make a debate uncontroversial. The paper can be found [here](http://helios.mi.parisdescartes.fr/~moraitis/webpapers/Moraitis-COMMA12b.pdf)
 
 ## Installation
 
@@ -53,3 +53,9 @@ The schema of the argumentation system is stored is a JSON file with the followi
   }
 }
 ```
+
+## to-do list
+
+- [ ] Refactor the project into folders.
+- [ ] Adding natural text parser.
+- [ ] Create a GUI.
