@@ -4,7 +4,7 @@ this is a school project on argumentation systems, where our goal is to pick the
 
 ## Installation
 
-After downloading the project, open the terminal in the root of your project and the follow this [tutorial](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/). At the end, your virtual python environment will be set to install the following libraries: 
+After downloading the project, open the terminal in the root of your project and follow this [tutorial](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/). At the end, your virtual python environment will be set to install the following libraries: 
 
 the library [networkx](https://networkx.github.io/) is used to manipulate and create directed graphs.
 
