@@ -1,36 +1,29 @@
-# uncontroversial-debate-solver
+# Picking the Right Expert to Make a Debate Uncontroversial
 
-this is a school project on argumentation systems, where our goal is to pick the right expert to make a debate uncontroversial. The paper can be found [here](http://helios.mi.parisdescartes.fr/~moraitis/webpapers/Moraitis-COMMA12b.pdf)
+this is a school project on argumentation systems, where the goal is to implement a solver to pick the right expert that makes a debate uncontroversial. The paper can be found [here](http://helios.mi.parisdescartes.fr/~moraitis/webpapers/Moraitis-COMMA12b.pdf)
 
-## Installation
+## Abstract
 
-After downloading the project, open the terminal in the root of your project and follow this [tutorial](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/). At the end, your virtual python environment will be set to install the following libraries: 
-
-the library [networkx](https://networkx.github.io/) is used to manipulate and create directed graphs.
-
-```bash
-pip install networkx
-```
-
-the library [prettytable](https://github.com/jazzband/prettytable) is used to print tables on console.
-
-```bash
-pip3 install PTable
-```
-
-the library [termcolor](https://pypi.org/project/termcolor/) is used to color text, make it bold, etc....
-
-```bash
-pip install termcolor
-```
+Agents contributing to (online) debate systems often have different areas of expertise. This must be considered if we want to define a decision making process based on the output of such a system. Distinguishing agents on the basis of their areas of expertise also opens an interesting perspective: when a debate is deemed 'controversial', calling an additional expert may be a natural way to make the decision easier. We introduce possible definitions that capture these notions and we provide a preliminary analysis with the objective to help a designer find the 'right' expert.
 
 ## Usage
 
-```python
-python3 Main.py "path/to/your/schema.json"
+```
+main.py [-h] --data FILENAME [--verbose] [--output [OUTPUT_PATH]]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --verbose, -v         show the 'WAS table' and detailed prints
+  --output [OUTPUT_PATH], -o [OUTPUT_PATH]
+                        the directory of the file where the result is stored,
+                        default is the current path
+
+required arguments:
+  --data FILENAME, -d FILENAME
+                        the path to the schema json file
 ```
 
-## Argumentation system file schema
+## Argumentation system input file schema
 The schema of the argumentation system is stored is a JSON file with the following tree:
 
 
@@ -54,7 +47,22 @@ The schema of the argumentation system is stored is a JSON file with the followi
 }
 ```
 
-## to-do list
+## Citation
+
+```
+@inproceedings{inproceedings,
+author = {Kontarinis, Dionysios and Bonzon, Elise and Maudet, Nicolas and Moraitis, Pavlos},
+year = {2012},
+month = {09},
+pages = {486-497},
+title = {Picking the Right Expert to Make a Debate Uncontroversial},
+volume = {245},
+journal = {Frontiers in Artificial Intelligence and Applications},
+doi = {10.3233/978-1-61499-111-3-486}
+}
+```
+
+## To-do list
 
 - [ ] Refactor the project into folders.
 - [ ] Adding natural text parser.

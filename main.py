@@ -1,5 +1,5 @@
-import os.path
-import sys
+from sys import exit
+from os import path, getcwd
 
 from solver.arg_systems.WAS import WAS
 from solver.expert.ExpertWithWAS import ExpertWithWAS as Expert
@@ -17,8 +17,9 @@ def main():
                           help='the path to the schema json file', required=True)
     parser.add_argument('--verbose', '-v', action='store_true', default=False, dest='verbose',
                         help='show the \'WAS table\' and detailed prints')
-    parser.add_argument('--output', '-o', action='store', nargs='?', const='./output.json', dest='output_path',
-                        help='the name of the file where the result is stored, default is output.json')
+    parser.add_argument('--output', '-o', action='store', nargs='?', const=getcwd(),
+                        dest='output_path',
+                        help='the directory of the file where the result is stored, default is the current path')
 
     console_arguments = parser.parse_args()
 
@@ -26,8 +27,9 @@ def main():
 
     output_path = console_arguments.output_path
 
-    if not os.path.isdir(output_path) or not [os.path.isfile(output_path) and output_path.endswith('.json')]:
-        sys.exit(f"{output_path} is not a json file nor a valid path, please provide a valid input")
+    if output_path is not None:
+        if not path.isdir(output_path):
+            exit(f"{output_path} is not a valid path, please provide a valid input")
 
     arguments, attacks, topics = WFP.read(filename)
 
