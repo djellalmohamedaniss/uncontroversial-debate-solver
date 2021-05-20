@@ -1,4 +1,4 @@
-from AS import AS
+from solver.core.AS import AS
 import networkx as nx
 
 class CounterPartAs(AS):

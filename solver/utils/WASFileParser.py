@@ -1,8 +1,8 @@
 import json
-from Expert import Expert
-from Argument import Argument
-from Attack import Attack
-from Vote import Vote
+from solver.core.Expert import Expert
+from solver.core.Argument import Argument
+from solver.core.Attack import Attack
+from solver.core.Vote import Vote
 
 def fillArgumentsAndExperts(JSON):
     arguments_list = {}

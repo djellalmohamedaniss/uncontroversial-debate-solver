@@ -1,11 +1,11 @@
-from AS import AS
+from solver.core.AS import AS
 import networkx as nx
 from copy import deepcopy
-from CounterPartAs import CounterPartAs
-from Vote import Vote
-from WASList import WASList
-from ExpertList import ExpertList
-from PossibleWAS import PossibleWASList as PossibleWAS
+from solver.arg_systems.CounterPartAs import CounterPartAs
+from solver.core.Vote import Vote
+from solver.containers.WASList import WASList
+from solver.containers.ExpertList import ExpertList
+from solver.containers.PossibleWASList import PossibleWASList as PossibleWAS
 
 
 class WAS(AS):

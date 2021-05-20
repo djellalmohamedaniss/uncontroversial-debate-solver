@@ -1,0 +1,9 @@
+networkx
+prettytable
+termcolor
+numpy
+scipy
+pandas
+matplotlib
+pydot
+pyyaml
